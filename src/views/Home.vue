@@ -5,7 +5,7 @@
             Posts loading...
         </b-button>
 
-        <b-card-group v-else-if="postsLoaded && posts.length > 0" deck>
+        <b-card-group v-else-if="postsLoaded && posts.length > 0" columns>
             <post-skeleton v-for="post in posts" :key="post.id" :post="post"></post-skeleton>
         </b-card-group>
 
