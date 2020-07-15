@@ -24,7 +24,7 @@ export default {
   },
   props: {
     post: {
-      type: Array
+      type: Object
     }
   }
 }
