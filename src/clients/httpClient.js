@@ -2,7 +2,7 @@ import axios from 'axios';
 
 axios.defaults.withCredentials = true;
 
-const httpClient = axios.create({
+export const httpClient = axios.create({
     baseURL: process.env.VUE_APP_API_REMOTE_URL,
     // https://stackoverflow.com/a/5381626/11171240
     // "...  Apache's default is 5 seconds"
@@ -13,4 +13,18 @@ const httpClient = axios.create({
     }
 })
 
-export default httpClient
+/**
+ * @param Axios client
+ * @returns {Object|Void}
+ */
+export const clientHandler = (client) => {
+    return client
+        .then(response => {
+            console.log('*** SUCCESS ***', response)
+            return response
+        })
+        .catch(error => {
+            console.log('--- FAILED ---', error)
+            return error
+        })
+}
