@@ -8,6 +8,8 @@
             <b-link  v-for="tag in post.tags" :key="tag.id" :href="'/tag/'+tag.slug" class="card-link">{{ tag.title }}</b-link>
         </div>
 
+        <b-button v-if="onEditCallback" @click="onEdit" variant="dark">Edit</b-button>
+
         <template v-slot:footer>
             <small class="text-muted">Last updated: {{ post.updated.date }}</small>
         </template>
@@ -25,6 +27,16 @@ export default {
   props: {
     post: {
       type: Object
+    },
+    onEditCallback: {
+      type: Function // the typeof a not required property can be `null` or `undefined`!
+    },
+  },
+  methods: {
+    onEdit () {
+      if ('function' === typeof this.onEditCallback) {
+        this.onEditCallback(this.post)
+      }
     }
   }
 }

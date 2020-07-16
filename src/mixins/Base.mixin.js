@@ -17,7 +17,30 @@ const BaseMixin = {
             }
 
             return (Error === clientResponse.constructor)
-        }
+        },
+        /**
+         * @param Any value
+         * @return Boolean
+         * https://stackoverflow.com/a/175787/11171240
+         * +undefined, +'true', +[true], +[433, 4324] = NaN
+         * +null, +false = 0
+         * +true = 1
+         * +433, +'433', +[433] = 433
+         */
+        isPositiveNumeric (value) {
+            if (!['string', 'number'].includes(typeof value)) {
+                return false
+            }
+            // To convert a string containing a number into a number:
+            let num = +value
+            // +num returns the numeric value of the string,
+            // or NaN if the string isn't purely numeric characters
+            if (NaN != num && 0 < num) {
+                return true
+            }
+
+            return false
+        },
     }
 }
 
