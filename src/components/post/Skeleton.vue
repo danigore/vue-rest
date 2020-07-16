@@ -27,7 +27,8 @@ export default {
   },
   props: {
     post: {
-      type: Object
+      type: Object,
+      required: true
     },
     onEditCallback: {
       type: Function // the typeof a not required property can be `null` or `undefined`!
