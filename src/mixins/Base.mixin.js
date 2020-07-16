@@ -35,7 +35,7 @@ const BaseMixin = {
             let num = +value
             // +num returns the numeric value of the string,
             // or NaN if the string isn't purely numeric characters
-            if (NaN != num && 0 < num) {
+            if (!isNaN(num) && 0 < num) {
                 return true
             }
 
