@@ -13,7 +13,12 @@
         </b-button>
 
         <b-card-group v-else-if="postsLoaded && posts.length > 0" columns>
-            <post-skeleton v-for="post in posts" :key="post.id" :post="post" :onEditCallback="postEditCallback"></post-skeleton>
+            <post-skeleton v-for="post in posts"
+                           :key="post.id"
+                           :post="post"
+                           :onEditCallback="postEditCallback"
+                           :onDeleteCallback="postDeleteCallback"
+            ></post-skeleton>
         </b-card-group>
 
         <b-alert v-else-if="postsLoaded && postError.length > 0" show variant="danger">{{ postError }}</b-alert>
@@ -49,6 +54,9 @@ export default {
     postEditCallback (post) {
       this.loadPostToForm(post)
       this.$bvModal.show('bv-modal')
+    },
+    postDeleteCallback (postId) {
+      this.deletePost(postId)
     }
   }
 }

@@ -83,7 +83,6 @@ PostsMixin.methods = Object.assign(PostsMixin.methods, {
 
             if ([200,201].includes(response.status)) {
                 if (200 === response.status) {
-                    console.log('det')
                     this.posts.splice(
                         this.posts.findIndex((post) => post.id === this.postForm.id),
                         1,
@@ -96,6 +95,28 @@ PostsMixin.methods = Object.assign(PostsMixin.methods, {
                 this.resetPostForm()
             } else {
                 this.postFormError = response.message
+            }
+        })
+    },
+    /**
+     * @param ID
+     * @returns {Promise<void>}
+     * Remove a Post
+     */
+    async deletePost (ID) {
+        if (!this.isPositiveNumeric(ID)) {
+            return
+        }
+
+        await PostsClient.delete(ID).then(response => {
+            if (this.isFailed(response)) {
+                return
+            }
+
+            if (204 === response.status) {
+                this.posts.splice(this.posts.findIndex((post) => post.id === ID), 1)
+            } else {
+                this.postError = response.message
             }
         })
     },

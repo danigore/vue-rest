@@ -9,6 +9,7 @@
         </div>
 
         <b-button v-if="onEditCallback" @click="onEdit" variant="dark">Edit</b-button>
+        <b-button v-if="onDeleteCallback" @click="onDelete" variant="danger">Delete</b-button>
 
         <template v-slot:footer>
             <small class="text-muted">Last updated: {{ post.updated.date }}</small>
@@ -31,13 +32,21 @@ export default {
     onEditCallback: {
       type: Function // the typeof a not required property can be `null` or `undefined`!
     },
+    onDeleteCallback: {
+      type: Function
+     },
   },
   methods: {
     onEdit () {
       if ('function' === typeof this.onEditCallback) {
         this.onEditCallback(this.post)
       }
-    }
+    },
+    onDelete () {
+      if ('function' === typeof this.onDeleteCallback) {
+        this.onDeleteCallback(this.post.id)
+      }
+    },
   }
 }
 </script>
