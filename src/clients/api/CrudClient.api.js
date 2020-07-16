@@ -31,7 +31,7 @@ export default class CrudClient {
      * @returns {Object|Void}
      */
     async update(data) {
-        return clientHandler(httpClient.patch(this.endPoint, data))
+        return clientHandler(httpClient.patch(this.endPoint+data.id, data))
     }
 
     /**
